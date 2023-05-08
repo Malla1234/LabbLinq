@@ -1,0 +1,76 @@
+﻿@model IEnumerable<SearchViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Information</h1>
+
+<form asp-action="Index" method="get">
+    <div class="form-group">
+        <label for="SearchString">Search by Name, Subjects:</label>
+        <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+        <input type="submit" value="Search" class="btn btn-primary" />
+    </div>
+</form>
+
+<a asp-action="Index">Back to full list</a>
+
+<hr />
+
+@if (Model.Count() > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StudentFirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StudentLastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Subjects)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TeacherFirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TeacherLastName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentLastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Subjects)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeacherFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TeacherLastName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" asp-route-teacherFirstName="@item.TeacherFirstName" asp-route-teacherLastName="@item.TeacherLastName"asp-route-studentFirstName="@item.StudentFirstName"asp-route-studentLastName="@item.StudentLastName" asp-route-subjects="@item.Subjects">Edit</a> |
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No results found.</p>
+}
+
+

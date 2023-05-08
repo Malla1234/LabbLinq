@@ -1,0 +1,53 @@
+﻿@model IEnumerable<LabbLinq.Models.SchoolConnection>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Teachers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Students)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Courses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StudentClasses)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Teachers.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Students.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Courses.CourseId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentClasses.StudentClassId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SchoolConnectionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SchoolConnectionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SchoolConnectionId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
